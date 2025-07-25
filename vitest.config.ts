@@ -15,22 +15,15 @@ export default defineConfig({
         silent: true,
         coverage: {
             provider: 'v8',
+            include: [
+                // 실제 소스 코드만 포함
+                'src/**/*.{ts,tsx}',
+            ],
             exclude: [
-                // 설정 파일들
-                'next.config.*',
-                'postcss.config.*',
-                'tailwind.config.*',
-                'vitest.config.*',
-                'vitest.setup.*',
-                '.eslintrc.*',
-                '.prettierrc.*',
-                // 타입 정의 파일들
-                '**/*.d.ts',
-                // Next.js 빌드 결과물
-                '.next/**',
                 // 테스트 파일들
                 '**/__tests__/**',
                 '**/*.test.*',
+                '**/test/**',
             ],
             reporter: ['text', 'json-summary'],
             all: true,

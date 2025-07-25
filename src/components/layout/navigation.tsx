@@ -1,25 +1,16 @@
 'use client'
 
+import { NAVIGATION_ITEMS } from '@/constants/menu'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
-const links = [
-    { href: '/', label: 'Home' },
-    { href: '/menu', label: 'Menu' },
-    { href: '/bears', label: 'Bears' },
-    { href: '/posts', label: 'Posts' },
-    { href: '/theme', label: 'Theme' },
-    { href: '/server-state', label: 'Server State' },
-    { href: '/canvas', label: 'Canvas' },
-]
 
 export function Navigation() {
     const pathname = usePathname()
 
     return (
         <nav className="flex space-x-4 bg-gray-800 p-4">
-            {links.map(({ href, label }) => (
+            {NAVIGATION_ITEMS.map(({ href, label }) => (
                 <Link
                     key={href}
                     href={href}

@@ -1,3 +1,5 @@
+import { FEATURES } from '@/constants/features'
+
 export default function HomePage() {
     return (
         <div className="space-y-4">
@@ -5,13 +7,9 @@ export default function HomePage() {
             <div className="space-y-2">
                 <h2 className="text-xl font-semibold">Features:</h2>
                 <ul className="list-inside list-disc space-y-1">
-                    <li>App Router</li>
-                    <li>Server-Side Rendering (Posts Page)</li>
-                    <li>Client-Side Rendering (Bears Page)</li>
-                    <li>TypeScript</li>
-                    <li>Zustand State Management</li>
-                    <li>Tailwind CSS</li>
-                    <li>Testing with Vitest</li>
+                    {FEATURES.map((feature) => (
+                        <li key={feature}>{feature}</li>
+                    ))}
                 </ul>
             </div>
         </div>

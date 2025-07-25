@@ -1,57 +1,40 @@
+import { NAVIGATION_ITEMS } from '@/constants/menu'
 import { render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { Navigation } from '../navigation'
 
-// next/navigation 모킹
+// Mock next/navigation
 vi.mock('next/navigation', () => ({
     usePathname: () => '/',
 }))
 
-// next/link 모킹
-vi.mock('next/link', () => ({
-    default: ({ href, children, className }: any) => (
-        <a href={href} className={className}>
-            {children}
-        </a>
-    ),
-}))
-
 describe('Navigation', () => {
-    it('renders all navigation links', () => {
+    it('모든 네비게이션 아이템이 표시되어야 합니다', () => {
         render(<Navigation />)
 
-        // 모든 링크가 렌더링되는지 확인
-        expect(screen.getByText('Home')).toBeInTheDocument()
-        expect(screen.getByText('Menu')).toBeInTheDocument()
-        expect(screen.getByText('Bears')).toBeInTheDocument()
-        expect(screen.getByText('Posts')).toBeInTheDocument()
-        expect(screen.getByText('Server State')).toBeInTheDocument()
-        expect(screen.getByText('Canvas')).toBeInTheDocument()
+        // 모든 네비게이션 링크 확인
+        NAVIGATION_ITEMS.forEach(({ href, label }) => {
+            const link = screen.getByRole('link', { name: label })
+            expect(link).toBeInTheDocument()
+            expect(link).toHaveAttribute('href', href)
+        })
 
-        // 링크의 href 속성 확인
-        expect(screen.getByText('Home')).toHaveAttribute('href', '/')
-        expect(screen.getByText('Menu')).toHaveAttribute('href', '/menu')
-        expect(screen.getByText('Bears')).toHaveAttribute('href', '/bears')
-        expect(screen.getByText('Posts')).toHaveAttribute('href', '/posts')
-        expect(screen.getByText('Server State')).toHaveAttribute('href', '/server-state')
-        expect(screen.getByText('Canvas')).toHaveAttribute('href', '/canvas')
+        // 링크 개수가 일치하는지 확인
+        const links = screen.getAllByRole('link')
+        expect(links).toHaveLength(NAVIGATION_ITEMS.length)
     })
 
-    it('applies active styles to current path', () => {
-        vi.mock('next/navigation', () => ({
-            usePathname: () => '/bears',
-        }))
-
+    it('현재 경로의 링크가 활성화되어야 합니다', () => {
         render(<Navigation />)
 
-        // 현재 경로의 링크는 활성화 스타일을 가짐
-        expect(screen.getByText('Bears')).toHaveClass('bg-gray-900 text-white')
+        // 현재 경로(/)의 링크는 활성화 스타일을 가져야 함
+        const homeLink = screen.getByRole('link', { name: 'Home' })
+        expect(homeLink).toHaveClass('bg-gray-900', 'text-white')
 
-        // 다른 링크들은 비활성화 스타일을 가짐
-        expect(screen.getByText('Home')).toHaveClass('text-gray-300')
-        expect(screen.getByText('Menu')).toHaveClass('text-gray-300')
-        expect(screen.getByText('Posts')).toHaveClass('text-gray-300')
-        expect(screen.getByText('Server State')).toHaveClass('text-gray-300')
-        expect(screen.getByText('Canvas')).toHaveClass('text-gray-300')
+        // 다른 링크들은 비활성화 스타일을 가져야 함
+        NAVIGATION_ITEMS.filter(item => item.href !== '/').forEach(({ label }) => {
+            const link = screen.getByRole('link', { name: label })
+            expect(link).toHaveClass('text-gray-300')
+        })
     })
 }) 
