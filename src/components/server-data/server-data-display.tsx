@@ -30,8 +30,9 @@ export function ServerDataDisplay({ initialData }: ServerDataDisplayProps) {
             <div className="space-y-2">
                 <Button
                     onClick={() => updateMessage(`클라이언트에서 업데이트: ${new Date().toLocaleString()}`)}
-                    value="클라이언트에서 메시지 업데이트"
-                />
+                >
+                    클라이언트에서 메시지 업데이트
+                </Button>
             </div>
         </div>
     )

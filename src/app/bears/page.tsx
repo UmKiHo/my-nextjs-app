@@ -13,18 +13,21 @@ export default function BearsPage() {
             <div className="space-y-2">
                 <Button
                     onClick={() => bearsState.increaseBears()}
-                    value="Increase Bears"
-                />
+                >
+                    Increase Bears
+                </Button>
                 <Button
                     onClick={() => bearsState.decreaseBears()}
-                    value="Decrease Bears"
                     disabled={bearsState.bears === 0}
-                />
+                >
+                    Decrease Bears
+                </Button>
                 <Button
                     onClick={() => bearsState.annahilateBears()}
-                    value="Annahilate Bears"
                     disabled={bearsState.bears === 0}
-                />
+                >
+                    Annahilate Bears
+                </Button>
             </div>
         </div>
     )

@@ -1,11 +1,24 @@
-export function Button(properties: JSX.IntrinsicElements['button']) {
+import clsx from 'clsx'
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'custom'
+}
+
+export function Button({ variant = 'primary', className, children, ...props }: ButtonProps) {
   return (
     <button
-      {...properties}
-      className={`hover:decoration-sky-600' flex w-72 place-content-center rounded-md border-2 border-gray-200
-			bg-teal-800 p-2 drop-shadow-xl hover:border-red-100 hover:underline`}
+      {...props}
+      className={clsx(
+        'flex min-w-[120px] items-center justify-center rounded-md px-4 py-2 font-medium transition-all',
+        {
+          'bg-teal-800 text-white hover:bg-teal-700 disabled:bg-teal-800/50': variant === 'primary',
+          'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:bg-gray-100': variant === 'secondary',
+          '': variant === 'custom',
+        },
+        className
+      )}
     >
-      <span className='font-semibold text-white antialiased'>{properties.value}</span>
+      {children}
     </button>
   )
 }

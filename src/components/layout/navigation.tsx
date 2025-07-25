@@ -9,6 +9,7 @@ const links = [
     { href: '/menu', label: 'Menu' },
     { href: '/bears', label: 'Bears' },
     { href: '/posts', label: 'Posts' },
+    { href: '/theme', label: 'Theme' },
     { href: '/server-state', label: 'Server State' },
     { href: '/canvas', label: 'Canvas' },
 ]

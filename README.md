@@ -9,6 +9,7 @@ Next.js + TypeScript + Zustand + Testing 예제 프로젝트입니다.
 - App Router
 - Server-Side Rendering (Posts Page)
 - Client-Side Rendering (Bears Page)
+- 동적 테마 변경 (Theme Page)
 - TypeScript
 - Zustand State Management
 - Tailwind CSS
@@ -51,13 +52,36 @@ src/
 ├── app/                    # Next.js 13 App Router
 │   ├── bears/             # Bears 페이지 (CSR 예제)
 │   ├── posts/             # Posts 페이지 (SSR 예제)
+│   ├── theme/             # Theme 페이지 (상태 관리 예제)
 │   └── server-state/      # Server State 페이지
 ├── components/            # 재사용 가능한 컴포넌트
+│   ├── theme/            # 테마 관련 컴포넌트
+│   └── layout/           # 레이아웃 컴포넌트
 ├── store/                # Zustand 스토어
 ├── styles/               # 전역 스타일
 ├── test/                 # 테스트 유틸리티
 └── utilities/            # 유틸리티 함수
 ```
+
+## 예제 설명
+
+### Bears 페이지
+- Client-Side Rendering 예제
+- Zustand를 사용한 기본적인 상태 관리
+
+### Posts 페이지
+- Server-Side Rendering 예제
+- 외부 API 데이터 페칭
+
+### Theme 페이지
+- 동적 테마 변경 예제
+- Zustand를 사용한 전역 테마 상태 관리
+- 컴포넌트 스타일 동적 변경
+- 테스트 코드 작성 예제
+
+### Server State 페이지
+- SSR과 클라이언트 상태 관리 결합
+- 서버 데이터 초기화
 
 ## 테스트
 
